@@ -1,7 +1,9 @@
 <app-full-screen-spinner [isLoading]="isLoading"></app-full-screen-spinner>
-
+<img src="assets/icon/logopuce.png" width="200" style="position:absolute;top:10%;left:20%" />
 <div id="login-container">
   <div>
+    <img src="assets/icon/logopucetec.png" width="150" style="position:absolute;top:0%;left:58%" />
+    <img src="assets/icon/arturo.png" width="60" style="position:absolute;top:0%;left:0%" />
     <ion-card>
       <ion-card-content>
         <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
@@ -19,7 +21,7 @@
 
           <ion-button expand="block" type="submit">{{ 'LOGIN.login' | translate }}</ion-button>
         </form>
-        <ion-button expand="block" (click) ="navigateSingUpPage()">Register page</ion-button>
+        <ion-button expand="block" (click) ="navigateSingUpPage()">Registro</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
