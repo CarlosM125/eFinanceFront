@@ -1,8 +1,9 @@
 <app-full-screen-spinner [isLoading]="isLoading"></app-full-screen-spinner>
 
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Estimations</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Estimaciones</ion-title>
+    <img src="assets/icon/pucetec-logo-blanco.png" width="82" style="position:absolute;top:24%;left:78%" /> 
   </ion-toolbar>
 </ion-header>
 
@@ -10,7 +11,7 @@
 
   <ion-list *ngIf="estimations.length > 0">
     <ion-list-header>
-      <ion-label size="large">Montly estimations</ion-label>
+      <ion-label size="large">Estimaciones mensuales</ion-label>
       <ion-fab-button color="primary" size="small" (click) = "toogleEstimationModal()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
@@ -19,7 +20,9 @@
     [title]="estimation.title"
     [amount]="estimation.amount"
     [date]=""
-    [isExpense]="false">
+    [isExpense]="false"
+    [id]="estimation.id"
+    [type]='type'>
     </app-movement-item>
     <app-movement-item
     [title]="'TOTAL'"

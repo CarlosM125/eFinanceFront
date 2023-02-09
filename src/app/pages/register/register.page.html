@@ -1,6 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Signup</ion-title>
+    <img src="assets/icon/pucetec-logo-blanco.png" width="82" style="position:absolute;top:24%;left:77%" /> 
   </ion-toolbar>
 </ion-header>
 
@@ -32,6 +33,7 @@
     </ion-item>
 
     <ion-button expand="block" type="submit">Sign up</ion-button>
+    <ion-button expand="block" [routerLink]="['/login']">Regresar</ion-button>
   </form>
 
 </ion-content>

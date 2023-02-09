@@ -18,8 +18,9 @@ export class EstimationsPage implements OnInit {
   estimationCount = 0;
   isEstimationModalOpen = false;
   isLoading: boolean;
-  private estimationsSubcription: Subscription;
+  type : string;
 
+  private estimationsSubcription: Subscription;
   constructor(
     private estimationsService: EstimationsService
   ) { }
@@ -38,6 +39,7 @@ export class EstimationsPage implements OnInit {
         this.isLoading = false;
       }
     );
+      this.type="Estimaciones";
   }
 
   toogleEstimationModal() {

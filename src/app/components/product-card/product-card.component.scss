@@ -3,7 +3,7 @@
 ion-card {
   background: url('../../../assets/backgrounds/product_background.jpg') no-repeat center;
   background-size: cover;
-  height: 80px;
+  height: 85px;
   box-shadow: inset 0 0 0 100px #00000090;
 }
 
@@ -22,6 +22,47 @@ ion-avatar {
   width: 36px;
   height: 36px;
   float: right;
+}
+
+.btn-41 {
+  padding: 0.5px 1px;
+  flex-wrap: wrap;
+  float: right;
+  position: relative;
+  background: transparent;
+  z-index: 1;
+  color: black;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-41:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  z-index: -1;
+  background: red;
+  transition: all 0.3s ease;
+}
+
+.btn-41:hover {
+  color: white;
+  background-color: red;
+  
+}
+
+.btn-41:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+.btn-41:active {
+  top: 2px;
 }
 
 /* Product card custom colors */

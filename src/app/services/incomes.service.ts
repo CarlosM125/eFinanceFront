@@ -26,10 +26,10 @@ export class IncomesService {
    */
   getIncomes(postPerPage: number, currentPage: number) {
     const queryParams = `?pageSize=${postPerPage}&page=${currentPage}`;
-    this.httpClient.get<{incomes: any; maxIncomes: number}>(BACKEND_URL + queryParams)
+    this.httpClient.get<{data: any; maxIncomes: number}>(BACKEND_URL + queryParams)
     .pipe(
       map(incomesData => ({
-          incomes: incomesData.incomes.map(income => ({
+          data: incomesData.data.map(income => ({
               id: income._id,
               title: income.title,
               description: income.description,
@@ -40,7 +40,7 @@ export class IncomesService {
         }))
     )
       .subscribe((transformedIncomesData) => {
-        this.incomes = transformedIncomesData.incomes;
+        this.incomes = transformedIncomesData.data;
         this.incomesUpdated.next({
           incomes: [...this.incomes],
           incomesCount: transformedIncomesData.maxIncomes
@@ -68,5 +68,14 @@ export class IncomesService {
         console.log(response);
         window.location.reload();
       });
+  }
+  delete(id:string){
+    const options:any= {
+      body:{
+        id:id
+      },
+    };
+    console.log("*****"+id+"****");
+    return this.httpClient.delete(BACKEND_URL+'/remove',options);
   }
 }

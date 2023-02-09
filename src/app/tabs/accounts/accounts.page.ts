@@ -26,6 +26,7 @@ export class AccountsPage implements OnInit, OnDestroy {
     this.accountSubscription = this.accountsService.getAccountsUpdatedListener().subscribe(
       (accountsData: {accounts: Account[]; maxAccounts: number}) => {
         this.accounts = accountsData.accounts;
+        //console.log(this.accounts);
         this.totalAccounts = accountsData.maxAccounts;
         this.isLoading = false;
       }
@@ -49,4 +50,5 @@ export class AccountsPage implements OnInit, OnDestroy {
       console.log(reason);
     });
   }
+  
 }

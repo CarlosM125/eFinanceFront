@@ -1,8 +1,9 @@
 <app-full-screen-spinner [isLoading]="isLoading"></app-full-screen-spinner>
 
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Accounts</ion-title>
+    <img src="assets/icon/pucetec-logo-blanco.png" width="82" style="position:absolute;top:24%;left:78%" /> 
   </ion-toolbar>
 </ion-header>
 
@@ -13,11 +14,11 @@
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-    <h3>My accounts</h3>
+    <h3 >Mis cuentas</h3>
     <ion-grid *ngIf="accounts.length > 0">
       <ion-row>
         <ion-col size="6" *ngFor="let account of accounts">
-          <app-product-card [name]="account.name" [amount]="account.amount" [color]="account.color"></app-product-card>
+          <app-product-card [name]="account.name" [amount]="account.amount" [color]="account.color" [_id]="account._id"></app-product-card>
         </ion-col>
       </ion-row>
     </ion-grid>

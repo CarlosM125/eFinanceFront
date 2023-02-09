@@ -27,7 +27,8 @@ export class MovementsPage implements OnInit, OnDestroy {
   expenseChartData = [];
   isExpense: boolean;
   isLoading: boolean;
-
+  type: string;
+  type2:string;
   private incomesSubcription: Subscription;
   private expensesSubcription: Subscription;
 
@@ -50,7 +51,10 @@ export class MovementsPage implements OnInit, OnDestroy {
           // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
           this.incomeAmount = this.incomeChartData.reduce<number>(function(a, b) {return a + b;}, 0);
           this.totalIncomes = incomesData.incomesCount;
+          console.log(this.incomes);
+          this.type="ingreso";
         }
+        
       );
 
     this.expensesService.getExpenses(this.postPerPage, this.currentPage);
@@ -63,8 +67,10 @@ export class MovementsPage implements OnInit, OnDestroy {
           this.expenseAmount = this.expenseChartData.reduce<number>(function(a, b) {return a + b}, 0);
           this.totalExpenses = expensesData.expensesCount;
           this.isLoading = false;
+          this.type2="gasto";
         }
       );
+      
   }
 
   /**

@@ -31,10 +31,10 @@ export class ExpensesService {
    */
   getExpenses(itemsPerPage: number, currentPage: number) {
     const queryParams = `?pageSize=${itemsPerPage}&page=${currentPage}`;
-    this.httpClient.get<{expenses: any; maxExpenses: number}>(BACKEND_URL + queryParams)
+    this.httpClient.get<{data: any; maxExpenses: number}>(BACKEND_URL + queryParams)
     .pipe(
       map(expensesData => ({
-          expenses: expensesData.expenses.map(expense => ({
+          data: expensesData.data.map(expense => ({
               id: expense._id,
               title: expense.title,
               description: expense.description,
@@ -44,7 +44,7 @@ export class ExpensesService {
             maxExpenses: expensesData.maxExpenses
         }))
     ).subscribe((transformedExpensesData) => {
-      this.expenses = transformedExpensesData.expenses;
+      this.expenses = transformedExpensesData.data;
       this.expensesUpdated.next({
         expenses: [...this.expenses],
         expensesCount: transformedExpensesData.maxExpenses
@@ -72,5 +72,13 @@ export class ExpensesService {
         console.log(response);
         window.location.reload();
       });
+  }
+  delete(id:string){
+    const options:any= {
+      body:{
+        id:id
+      },
+    };
+    return this.httpClient.delete(BACKEND_URL+'/remove',options);
   }
 }

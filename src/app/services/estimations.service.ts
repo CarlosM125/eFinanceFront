@@ -43,10 +43,10 @@ export class EstimationsService {
 
   getEstimations(itemsPerPage: number, currentPage: number) {
     const queryParams = `?pageSize=${itemsPerPage}&page=${currentPage}`;
-    this.http.get<{estimations: any; maxEstimations: number}>(BACKEND_URL + queryParams)
+    this.http.get<{data: any; maxEstimations: number}>(BACKEND_URL + queryParams)
     .pipe(
       map(estimationsData => ({
-          estimations: estimationsData.estimations.map(estimation => ({
+          data: estimationsData.data.map(estimation => ({
               id: estimation._id,
               title: estimation.title,
               amount: estimation.amount,
@@ -55,7 +55,7 @@ export class EstimationsService {
             maxEstimations: estimationsData.maxEstimations
         }))
     ).subscribe((transformedEstimationsData) => {
-      this.estimations = transformedEstimationsData.estimations;
+      this.estimations = transformedEstimationsData.data;
       this.estimationsUpdated.next({
         estimations: [...this.estimations],
         maxEstimations: transformedEstimationsData.maxEstimations,
@@ -65,5 +65,13 @@ export class EstimationsService {
 
   getEstimationsUpdatedListener() {
     return this.estimationsUpdated.asObservable();
+  }
+  delete(id:string){
+    const options:any= {
+      body:{
+        id:id
+      },
+    };
+    return this.http.delete(BACKEND_URL+'/remove',options);
   }
 }

@@ -12,6 +12,7 @@ export class RegisterPage implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    
   }
 
   onSignUp(ngForm: NgForm) {
@@ -20,5 +21,7 @@ export class RegisterPage implements OnInit {
     }
     this.userService.createUser(ngForm.value.email, ngForm.value.name, ngForm.value.lastname, ngForm.value.password);
   }
-
+ /* navigateLoginPage(){
+    this.router.navigate(['/login']);
+  }*/
 }

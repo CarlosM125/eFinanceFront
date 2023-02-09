@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Account } from '../models/account';
 import { AuthData } from '../models/auth-data';
@@ -16,7 +16,6 @@ const BACKEND_URL =  environment.apiUrl + '/accounts';
 export class AccountsService {
   private accounts: Account [] = [];
   private accountsUpdated= new Subject<{accounts: Account[]; maxAccounts: number}>();
-
   /**
    * Constructor
    */
@@ -30,11 +29,11 @@ export class AccountsService {
    */
   getAccounts(itemsPerPage: number, currentPage: number) {
     const queryParams = `?pageSize=${itemsPerPage}&page=${currentPage}`;
-    this.httpClient.get<{accounts: Account[]; maxAccounts: number}>(BACKEND_URL + queryParams)
+    this.httpClient.get<{data: Account[]; maxAccounts: number}>(BACKEND_URL + queryParams)
     .pipe(
       map(accountsData => ({
-        accounts: accountsData.accounts.map(account => ({
-          id: account.id,
+        data: accountsData.data.map(account => ({
+          _id: account._id,
           name: account.name,
           color: account.color,
           amount: account.amount,
@@ -43,7 +42,7 @@ export class AccountsService {
         maxAccounts: accountsData.maxAccounts
       }))
     ).subscribe((transformedAccountData) => {
-      this.accounts = transformedAccountData.accounts;
+      this.accounts = transformedAccountData.data;
       this.accountsUpdated.next({
         accounts: [...this.accounts],
         maxAccounts: transformedAccountData.maxAccounts,
@@ -73,5 +72,13 @@ export class AccountsService {
         console.log(response);
         window.location.reload();
       });
+  }
+  delete(id:string){
+    const options:any= {
+      body:{
+        id:id
+      },
+    };
+    return this.httpClient.delete(BACKEND_URL+'/remove',options);
   }
 }
