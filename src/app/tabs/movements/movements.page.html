@@ -25,7 +25,9 @@
     [title]="income.title"
     [amount]="income.amount"
     [date]="income.date"
-    [isExpense]="false">
+    [isExpense]="false"
+    [type]="type"
+    [id]="income.id">
     </app-movement-item>
   </ion-list>
 
@@ -45,7 +47,9 @@
     [title]="expense.title"
     [amount]="expense.amount"
     [date]="expense.date"
-    [isExpense]="true">
+    [isExpense]="true"
+    [type]="type2"
+    [id]="expense.id">
     </app-movement-item>
   </ion-list>
 

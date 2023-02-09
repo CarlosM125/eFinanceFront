@@ -66,4 +66,13 @@ export class EstimationsService {
   getEstimationsUpdatedListener() {
     return this.estimationsUpdated.asObservable();
   }
+
+  delete(id:string){
+    const options:any={
+      body:{
+        id:id
+      },
+    };
+    return this.http.delete(BACKEND_URL+'/remove',options)
+  }
 }

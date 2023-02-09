@@ -73,4 +73,13 @@ export class ExpensesService {
         window.location.reload();
       });
   }
+
+  delete(id:string){
+    const options:any={
+      body:{
+        id:id
+      },
+    };
+    return this.httpClient.delete(BACKEND_URL+'/remove',options)
+  }
 }

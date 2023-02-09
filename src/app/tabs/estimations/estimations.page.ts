@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { type } from 'os';
 import { Subscription } from 'rxjs';
 import { Estimation } from 'src/app/models/estimation';
 import { EstimationsService } from 'src/app/services/estimations.service';
@@ -10,6 +11,7 @@ import { EstimationsService } from 'src/app/services/estimations.service';
 })
 export class EstimationsPage implements OnInit {
 
+  type: string;
   estimations: Estimation[] = [];
   itemsPerPage = 20;
   currentPage = 1;
@@ -36,6 +38,7 @@ export class EstimationsPage implements OnInit {
         this.estimationTotalAmount = this.estimationAmountArray.reduce<number>(function(a, b) {return a + b;},0);
         this.estimationCount = estimationsData.maxEstimations;
         this.isLoading = false;
+        this.type = "Estimaciones";
       }
     );
   }

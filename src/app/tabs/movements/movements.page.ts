@@ -11,6 +11,10 @@ import { IncomesService } from 'src/app/services/incomes.service';
   styleUrls: ['./movements.page.scss'],
 })
 export class MovementsPage implements OnInit, OnDestroy {
+
+  type: string;
+  type2: string;
+
   incomes: Incomes[] = [];
   expenses: Expenses[] = [];
   weekDays = [];
@@ -44,12 +48,13 @@ export class MovementsPage implements OnInit, OnDestroy {
     this.incomesService.getIncomes(this.postPerPage, this.currentPage);
     this.incomesSubcription = this.incomesService.getIncomesUpdatedListener()
       .subscribe(
-        (incomesData: {incomes: Incomes[]; incomesCount: number}) => {
+          (incomesData: {incomes: Incomes[]; incomesCount: number}) => {
           this.incomes = incomesData.incomes;
           this.incomeChartData = incomesData.incomes.map(income => income.amount);
           // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
           this.incomeAmount = this.incomeChartData.reduce<number>(function(a, b) {return a + b;}, 0);
           this.totalIncomes = incomesData.incomesCount;
+          this.type = "Ingreso";
         }
       );
 
@@ -63,6 +68,7 @@ export class MovementsPage implements OnInit, OnDestroy {
           this.expenseAmount = this.expenseChartData.reduce<number>(function(a, b) {return a + b}, 0);
           this.totalExpenses = expensesData.expensesCount;
           this.isLoading = false;
+          this.type2 = "Gasto";
         }
       );
   }
